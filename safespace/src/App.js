@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Login, Authenticate } from './components/AuthLogin';
+// import { Login, Authenticate } from './components/AuthLogin';
 import Home from './components/Home';
 import { Backdrop } from './styledComponents/GenStyling';
 
@@ -16,4 +16,5 @@ class App extends Component {
     }
 }
 
-export default Authenticate(App)(Login);
+export default App;
+// export default Authenticate(App)(Login);

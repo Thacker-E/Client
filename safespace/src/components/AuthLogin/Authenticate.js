@@ -37,7 +37,6 @@ const Authenticate = App => Login => {
                 )
                 .then(res => {
                     console.log(res.data);
-                    // this.setState({ token: res.data.token })
                     localStorage.setItem('jwt', res.data.token);
                     this.setState({ isLoggedIn: true });
                     this.props.history.push('/');
@@ -60,7 +59,6 @@ const Authenticate = App => Login => {
                 )
                 .then(res => {
                     console.log(res.data.message);
-                    // this.setState({ token: res.data.token })
                     localStorage.setItem('jwt', res.data.token);
                     this.setState({ isLoggedIn: true });
                     this.props.history.push('/');

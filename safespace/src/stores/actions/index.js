@@ -26,16 +26,6 @@ export const fetchNotes = () => dispatch => {
         });
 };
 
-// export const fetchNotes = () => async dispatch => {
-//     dispatch({ type: FETCH_NOTES });
-//     try {
-//         const res = await axios.get(``);
-//         dispatch({ FETCH_SUCCESS, payload: res.data.results });
-//     } catch(err) {
-//         dispatch({ type: FETCH_FAILURE, payload: err });
-//     };
-// };
-
 export const addNote = note => dispatch => {
     dispatch({ type: ADD_NOTE });
     axios
