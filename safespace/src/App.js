@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Login, Authenticate } from './components/AuthLogin';
+import Home from './components/Home';
+import { Backdrop } from './styledComponents/GenStyling';
 
 class App extends Component {
     state = {};
     
     render() {
         return (
-            <div className="App">
+            <Backdrop>
                 hai
-            </div>
+                <Home />
+            </Backdrop>
         );
     }
 }

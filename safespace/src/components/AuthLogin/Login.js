@@ -1,61 +1,112 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 export default class Login extends React.Component {
     state = {
+        activeForm: 'login',
         username: '',
-        password: ''
+        password: '',
+        phone: ''
+    };
+
+    displayRegister = () => {
+        this.setState({
+            activeForm: 'register',
+            username: '',
+            password: '',
+            phone: ''
+        });
+    };
+
+    displayLogin = () => {
+        this.setState({
+            activeForm: 'login',
+            username: '',
+            password: ''
+        });
     };
 
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    loginHandler = e => {
-        e.preventDefault();
-        
-        const user = this.state.username;
-        localStorage.setItem('user', user);
-        window.location.reload();
-
-        // axios
-        //     .get(``, this.state)
-        //     .then(res => {
-        //         localStorage.setItem('jwt', res.data.token);
-        //         this.props.history.push('/');
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-    };
-
     render() {
         return (
             <div>
-                <form onSubmit={this.loginHandler}>
-                    <input
-                        type='text'
-                        name='username'
-                        placeholder='Username'
-                        value={this.state.username}
-                        onChange={this.changeHandler}
-                        required
-                    />
-                    <input
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        value={this.state.password}
-                        onChange={this.changeHandler}
-                        required
-                    />
-                    <button type='submit'>Log In</button>
-                </form>
-                <h3>
-                    {" "}
-                    Not a registered user? Sign up <Link to='/signup'>here</Link>!
-                </h3>
+                {this.state.activeForm === 'login' ? (
+                    <form onSubmit={e => {
+                        this.props.loginHandler(e);
+                    }}>
+                        <input
+                            type='text'
+                            name='username'
+                            placeholder='Username'
+                            value={this.state.username}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <input
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={this.state.password}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <div>
+                            <button
+                                type='submit'
+                                value='Login'
+                                onClick={this.loginHandler}
+                            >Log In</button>
+                            <button
+                                type='submit'
+                                value='Register'
+                                onClick={this.displayRegister}
+                            >Register</button>
+                        </div>
+                    </form>
+                ) : (
+                    <form onSubmit={e => {
+                        this.props.registrationHandler(e);
+                    }}>
+                        <input
+                            type='text'
+                            name='username'
+                            placeholder='Username'
+                            value={this.state.username}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <input
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={this.state.password}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <input
+                            type='text'
+                            name='phone'
+                            placeholder='Phone number'
+                            value={this.state.phone}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <div>
+                            <button
+                                type='submit'
+                                value='Login'
+                                onClick={this.displayLogin}
+                            >Log In</button>
+                            <button
+                                type='submit'
+                                value='Register'
+                                onClick={this.registrationHandler}
+                            >Register</button>
+                        </div>
+                    </form>
+                )}
             </div>
         );
     };
