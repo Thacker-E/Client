@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { Login, Authenticate } from './components/AuthLogin';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        hai
-      </div>
-    );
-  }
+    state = {};
+    
+    render() {
+        return (
+            <div className="App">
+                hai
+            </div>
+        );
+    }
 }
 
-export default App;
+export default Authenticate(App)(Login);
