@@ -15,9 +15,7 @@ export default class Login extends React.Component {
         this.setState({
             activeForm: 'login',
             username: '',
-            phone: '',
-            password: '',
-            confirmPassword: '',
+            password: ''
         });
     };
 
@@ -98,12 +96,13 @@ export default class Login extends React.Component {
                                         Notice: this servive sends you uplifting and positive messages throughout
                                         the day via your cellphone; you may incur addition charges by your carrier.
                                         By registering with Safe Space™, you agree to all of our {" "}
-                                        <button
-                                            type='button'
-                                            value='Terms'
-                                            onClick={this.displayTerms}
-                                        >Terms and Conditions</button>.
-                                        
+                                        <Link to='/terms-and-conditions'>
+                                            <button
+                                                type='button'
+                                                value='Terms'
+                                                onClick={this.displayTerms}
+                                            >Terms and Conditions</button>
+                                        </Link>.
                                     </p>
                                 </div>
                                 <form onSubmit={e => {
@@ -135,7 +134,7 @@ export default class Login extends React.Component {
                                     />
                                     <input
                                         type='password'
-                                        name='password'
+                                        name='confirmPassword'
                                         placeholder='Confirm password'
                                         value={this.state.confirmPassword}
                                         onChange={this.changeHandler}
@@ -157,12 +156,14 @@ export default class Login extends React.Component {
                             </div>
                         ) : (
                             <div>
-                                <Route path='/terms-and-conditions' component={TermsConditions} />
-                                <button
-                                    type='button'
-                                    value='Register'
-                                    onClick={this.displayRegister}
-                                >Ok</button>
+                                <Route exact path='/terms-and-conditions' component={TermsConditions} />
+                                <Link to='/'>
+                                    <button
+                                        type='button'
+                                        value='Register'
+                                        onClick={this.displayRegister}
+                                    >Ok</button>
+                                </Link>
                             </div>
                         )}
                     </div>

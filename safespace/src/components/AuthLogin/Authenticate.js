@@ -31,7 +31,7 @@ const Authenticate = App => Login => {
                     console.log(res.data);
                     localStorage.setItem('jwt', res.data.token);
                     this.setState({ isLoggedIn: true });
-                    this.props.history.push('/');
+                    this.props.history.push('/home');
                 })
                 .catch(err => console.error(err));
         }
@@ -41,8 +41,7 @@ const Authenticate = App => Login => {
             const registrationCredentials = {
                 username: e.target[0].value,
                 phone: e.target[1].value,
-                password: e.target[2].value,
-                confirmPassword: e.target[3].value
+                password: e.target[2].value
             };
             console.log("What are these registration credentials?", registrationCredentials);
             if (this.password !== this.confirmPassword) {
@@ -57,14 +56,14 @@ const Authenticate = App => Login => {
                         console.log(res.data.message);
                         localStorage.setItem('jwt', res.data.token);
                         this.setState({ isLoggedIn: true });
-                        this.props.history.push('/');
+                        this.props.history.push('/home');
                     })
                     .catch(err => console.error(err));
             }
         }
 
         render() {
-            if (this.state.loggedIn) {
+            if (this.state.isLoggedIn) {
                 return <App />;
             } else {
                 return (
