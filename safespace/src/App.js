@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 // import { Login, Authenticate } from './components/AuthLogin';
-import Home from './components/Home';
+import NavBanner from './components/NavBanner/NavBanner';
+import { Home, About, Help, Contact } from './views';
 import { Backdrop } from './styledComponents/GenStyling';
 
 class App extends Component {
@@ -10,7 +12,11 @@ class App extends Component {
         return (
             <Backdrop>
                 hai
-                <Home />
+                <NavBanner />
+                <Route exact path='/' component={Home} />
+                <Route path='/about' component={About} />
+                <Route path='/help' component={Help} />
+                <Route path='/contact' component={Contact} />
             </Backdrop>
         );
     }

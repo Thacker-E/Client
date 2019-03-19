@@ -5,3 +5,9 @@ export const Backdrop = styled.div`
     height: 100vh;
     background-color: pink;
 `;
+
+export const Text = styled.text`
+    h1 {
+        color: #7a93c0;
+    }
+`;

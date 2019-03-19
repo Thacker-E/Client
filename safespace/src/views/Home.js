@@ -1,10 +1,12 @@
 import React from 'react';
+// import NoteList from './Noteboard/NoteList';
 
 class Home extends React.Component {
     render() {
         return (
             <div>
-                Hello, Moto
+                Home dis page he'yuh...
+                {/* <NoteList /> */}
             </div>
         );
     };
