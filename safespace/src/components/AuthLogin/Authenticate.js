@@ -8,14 +8,6 @@ const Authenticate = App => Login => {
             token: null
         };
 
-        // componentDidMount() {
-        //     if (!localStorage.getItem('user')) {
-        //         this.setState({ loggedIn: false });
-        //     } else {
-        //         this.setState({ loggedIn: true });
-        //     };
-        // };
-
         componentDidMount() {
             if(localStorage.getItem('jwt')) {
                 this.setState({ isLoggedIn: true });
@@ -48,22 +40,27 @@ const Authenticate = App => Login => {
             e.preventDefault();
             const registrationCredentials = {
                 username: e.target[0].value,
-                password: e.target[1].value,
-                phone: e.target[2].value
+                phone: e.target[1].value,
+                password: e.target[2].value,
+                confirmPassword: e.target[3].value
             };
             console.log("What are these registration credentials?", registrationCredentials);
-            axios
-                .post(
-                    `https://safespacebackend.herokuapp.com/register`,
-                    registrationCredentials
-                )
-                .then(res => {
-                    console.log(res.data.message);
-                    localStorage.setItem('jwt', res.data.token);
-                    this.setState({ isLoggedIn: true });
-                    this.props.history.push('/');
-                })
-                .catch(err => console.error(err));
+            if (this.password !== this.confirmPassword) {
+                alert("The passwords don't match.")
+            } else {
+                axios
+                    .post(
+                        `https://safespacebackend.herokuapp.com/register`,
+                        registrationCredentials
+                    )
+                    .then(res => {
+                        console.log(res.data.message);
+                        localStorage.setItem('jwt', res.data.token);
+                        this.setState({ isLoggedIn: true });
+                        this.props.history.push('/');
+                    })
+                    .catch(err => console.error(err));
+            }
         }
 
         render() {

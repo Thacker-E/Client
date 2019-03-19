@@ -4,16 +4,18 @@ export default class Login extends React.Component {
     state = {
         activeForm: 'login',
         username: '',
+        phone: '',
         password: '',
-        phone: ''
+        confirmPassword: '',
     };
 
     displayRegister = () => {
         this.setState({
             activeForm: 'register',
             username: '',
+            phone: '',
             password: '',
-            phone: ''
+            confirmPassword: '',
         });
     };
 
@@ -21,7 +23,9 @@ export default class Login extends React.Component {
         this.setState({
             activeForm: 'login',
             username: '',
-            password: ''
+            phone: '',
+            password: '',
+            confirmPassword: '',
         });
     };
 
@@ -78,6 +82,14 @@ export default class Login extends React.Component {
                             required
                         />
                         <input
+                            type='text'
+                            name='phone'
+                            placeholder='Phone number'
+                            value={this.state.phone}
+                            onChange={this.changeHandler}
+                            required
+                        />
+                        <input
                             type='password'
                             name='password'
                             placeholder='Password'
@@ -86,10 +98,10 @@ export default class Login extends React.Component {
                             required
                         />
                         <input
-                            type='text'
-                            name='phone'
-                            placeholder='Phone number'
-                            value={this.state.phone}
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={this.state.confirmPassword}
                             onChange={this.changeHandler}
                             required
                         />
