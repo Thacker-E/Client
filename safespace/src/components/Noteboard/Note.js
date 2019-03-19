@@ -1,20 +1,22 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getNote } from '../../stores/actions';
 
-export default class Note extends React.Component {
-    state = {
-        note: ''
-    };
+class Note extends React.Component {
+    // componentDidMount() {
+    //     this.props.getNote();
+    // };
 
-    componentDidMount() {
-        axios
-            .get(`${this.props.match.params}`)
-            .then(res => {
-                this.setState({ note: res.data });
-            })
-            .catch(err => {
-                console.error(err);
-            });
+    render() {
+        return (
+            <div>
+                <h2>dis a note yis</h2>
+                {/* <h2>{this.props.note.title}</h2> */}
+                {/* <p>{this.props.note.notebody}</p> */}
+
+            </div>
+        );
     };
 };
+
+export default connect(null, { getNote })(Note);

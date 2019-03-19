@@ -3,6 +3,9 @@ import axios from 'axios';
 export const FETCH_NOTES = 'FETCH_NOTES';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
+export const GET_NOTE = 'GET_NOTE';
+export const GET_SUCCESS = 'GET_SUCCESS';
+export const GET_FAILURE = 'GET_FAILURE';
 export const ADD_NOTE = 'ADD_NOTE';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
 export const ADD_FAILURE = 'ADD_FAILURE';
@@ -23,6 +26,19 @@ export const fetchNotes = () => dispatch => {
         .catch(err => {
             console.error(err);
             dispatch({ type: FETCH_FAILURE, payload: err });
+        });
+};
+
+export const getNote = () => dispatch => {
+    dispatch({ type: GET_NOTE });
+    axios
+        .get(`${this.props.match.params}`)
+        .then(res => {
+            dispatch({ type: GET_SUCCESS, payload: res.data.results });
+        })
+        .catch(err => {
+            console.error(err);
+            dispatch({ type: GET_FAILURE, payload: err });
         });
 };
 

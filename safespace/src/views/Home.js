@@ -1,13 +1,14 @@
 import React from 'react';
-// import NoteList from './Noteboard/NoteList';
+import NoteList from '../components/Noteboard/NoteList';
+import { CenterStage } from '../styledComponents/GenStyling';
 
 class Home extends React.Component {
     render() {
         return (
-            <div>
+            <CenterStage>
                 Home dis page he'yuh...
-                {/* <NoteList /> */}
-            </div>
+                <NoteList />
+            </CenterStage>
         );
     };
 };

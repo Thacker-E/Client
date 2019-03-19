@@ -11,9 +11,8 @@ class App extends Component {
     render() {
         return (
             <Backdrop>
-                hai
                 <NavBanner />
-                <Route exact path='/home' component={Home} />
+                <Route exact path='/' component={Home} />
                 <Route path='/about' component={About} />
                 <Route path='/help' component={Help} />
                 <Route path='/contact' component={Contact} />
