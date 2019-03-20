@@ -1,6 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+axios.interceptors.request.use(
+    function(options) {
+        options.headers.authorization = localStorage.getItem('jwt');
+        return options;
+    },
+    function(error) {
+        return Promise.reject(error)
+    }
+);
+
 const Authenticate = App => Login => {
     return class extends React.Component {
         state = {
@@ -31,7 +41,7 @@ const Authenticate = App => Login => {
                     console.log(res.data);
                     localStorage.setItem('jwt', res.data.token);
                     this.setState({ isLoggedIn: true });
-                    this.props.history.push('/home');
+                    this.props.history.push('/');
                 })
                 .catch(err => console.error(err));
         }
@@ -56,7 +66,7 @@ const Authenticate = App => Login => {
                         console.log(res.data.message);
                         localStorage.setItem('jwt', res.data.token);
                         this.setState({ isLoggedIn: true });
-                        this.props.history.push('/home');
+                        this.props.history.push('/');
                     })
                     .catch(err => console.error(err));
             }
