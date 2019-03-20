@@ -1,11 +1,19 @@
 import React from 'react';
+import { CenterStage, ButtonBox, Text } from '../styledComponents/GenStyling';
+import { TopContainer } from '../styledComponents/MessageStyling';
+import { Grindr } from '../styledComponents/ImgStyling';
 
-export default class Help extends React.Component {
+export default class About extends React.Component {
     render() {
         return (
-            <div>
-                Help dis page he'yuh...
-            </div>
+            <CenterStage>
+                <Grindr>
+                    <TopContainer>
+                        <Text><h2>IF YOU'RE STUCK...</h2></Text>
+                        <ButtonBox />
+                    </TopContainer>
+                </Grindr>
+            </CenterStage>
         )
     }
 };

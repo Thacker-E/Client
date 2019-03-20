@@ -1,14 +1,14 @@
-import { FETCH_NOTES, FETCH_SUCCESS, FETCH_FAILURE } from '../actions';
+import { FETCH_MESSAGE, FETCH_SUCCESS, FETCH_FAILURE } from '../actions';
 
 const iniState = {
-    notes: [],
+    messages: [],
     fetching: false,
     error: null
 }
 
 export const fetchReducers = (state = iniState, action) => {
     switch (action.type) {
-        case FETCH_NOTES:
+        case FETCH_MESSAGE:
             return {
                 ...state,
                 fetching: true
@@ -16,7 +16,7 @@ export const fetchReducers = (state = iniState, action) => {
         case FETCH_SUCCESS: 
             return {
                 ...state,
-                notes: [action.payload],
+                messages: [ ...action.payload ],
                 fetching: false
             };
         case FETCH_FAILURE:

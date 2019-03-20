@@ -1,21 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Text } from '../../styledComponents/GenStyling';
+import {
+    Banner,
+    CenterBoxseat,
+    Sectional,
+    WebsiteName,
+    PageName,
+    LinkNotButton
+} from '../../styledComponents/NavStyling';
 
 const AboutBanner = props => (
-    <div>
-        <div>
-            <Text><h2>About</h2></Text>
-        </div>
-        <div>
-            <Text><h1>YOUR SAFE SPACE</h1></Text>
-        </div>
-        <div>
-            <Link to='/'><button type='button' onClick={props.displayHome}>Home</button></Link>
-            <Link to='/help'><button type='button' onClick={props.displayHelp}>Help</button></Link>
-            <Link to='/contact'><button type='button' onClick={props.displayContact}>Contact</button></Link>
-        </div>
-    </div>
+    <Banner>
+        <Sectional>
+            <PageName>ABOUT</PageName>
+        </Sectional>
+        <CenterBoxseat>
+            <WebsiteName>YOUR SAFE SPACE</WebsiteName>
+        </CenterBoxseat>
+        <Sectional>
+            <Link to='/'>
+                <LinkNotButton type='button' onClick={props.displayHome}>
+                    HOME
+                </LinkNotButton>
+            </Link>
+            <Link to='/help'>
+                <LinkNotButton type='button' onClick={props.displayHelp}>
+                    HELP
+                </LinkNotButton>
+            </Link>
+            <Link to='/contact'>
+                <LinkNotButton type='button' onClick={props.displayContact}>
+                    CONTACT
+                </LinkNotButton>
+            </Link>
+        </Sectional>
+    </Banner>
 );
 
 export default AboutBanner;
