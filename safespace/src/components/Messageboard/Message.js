@@ -5,8 +5,7 @@ import { MessageBody } from '../../styledComponents/MessageStyling';
 const Message = ({ message }) => (
     <MessageBody>
         <Text>
-            <h3>{message.title}</h3>
-            <p>{message.messageBody}</p>
+            <p>{message}</p>
         </Text>
     </MessageBody>
 )

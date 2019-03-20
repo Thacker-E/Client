@@ -76,7 +76,7 @@ export const IsButton = styled.button`
     }
 `;
 
-export const Text = styled.text`
+export const Text = styled.div`
     width: auto;
     height: auto;
     padding:  0.625em;

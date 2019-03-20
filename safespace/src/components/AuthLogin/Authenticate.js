@@ -1,6 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+axios.interceptors.request.use(
+    function(options) {
+        options.headers.authorization = localStorage.getItem('jwt');
+        return options;
+    },
+    function(error) {
+        return Promise.reject(error)
+    }
+);
+
 const Authenticate = App => Login => {
     return class extends React.Component {
         state = {

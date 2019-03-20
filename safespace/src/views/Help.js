@@ -14,6 +14,6 @@ export default class About extends React.Component {
                     </TopContainer>
                 </Grindr>
             </CenterStage>
-        )
-    }
+        );
+    };
 };

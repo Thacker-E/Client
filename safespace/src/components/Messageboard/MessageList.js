@@ -1,18 +1,22 @@
 import React from 'react';
-import Message from './Message';
+// import Message from './Message';
 import Checkbox from './Checkbox';
-import { Spotlight } from '../../styledComponents/GenStyling';
-import { MessageRow } from '../../styledComponents/MessageStyling';
+import { Spotlight, Text } from '../../styledComponents/GenStyling';
+import { MessageRow, MessageBody, } from '../../styledComponents/MessageStyling';
 
 class MessageList extends React.Component {
-
-    render(props) {
+    render() {
         return (
             <Spotlight>
-                    {props.messages.map(message => (
+                    {this.props.messages.map(message => (
                         <MessageRow key={message.id}>
                             <Checkbox />
-                            <Message message={message} />
+                            <MessageBody>
+                                <Text>
+                                    <p>{message}</p>
+                                </Text>
+                            </MessageBody>
+                            {/* <Message message={message} /> */}
                         </MessageRow>
                     ))}
             </Spotlight>

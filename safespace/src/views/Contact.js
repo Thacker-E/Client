@@ -13,6 +13,6 @@ export default class About extends React.Component {
                     </TopContainer>
                 </Spotlight>
             </CenterStage>
-        )
-    }
+        );
+    };
 };

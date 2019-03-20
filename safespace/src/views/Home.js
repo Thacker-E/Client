@@ -1,4 +1,5 @@
 import React from 'react';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../stores/actions';
 import MessageList from '../components/Messageboard/MessageList';
@@ -6,6 +7,20 @@ import { CenterStage, Spotlight, Text, ButtonBox, ButtonCage, IsButton } from '.
 import { TopContainer } from '../styledComponents/MessageStyling';
 
 class Home extends React.Component {
+    state = {
+        messages: [],
+    }
+
+    // componentDidMount() {
+    //     axios.get('https://safespacebackend.herokuapp.com/messages')
+    //     .then(res => {
+    //         console.log(res)
+    //         this.setState({
+    //             messages: res.data,
+    //         })
+    //     })
+    // }
+    
     componentDidMount() {
         this.props.fetchMessages();
     };
@@ -25,10 +40,13 @@ class Home extends React.Component {
                             </ButtonCage>
                         </ButtonBox>
                     </TopContainer>
-                    {this.props.fetchMessages !== 'fetching' ? (
+                    {this.props.fetchMessages === 'fetching' ? (
                         <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
                     ) : (
-                        <MessageList messages={this.props.messages} />
+                        <MessageList
+                            messages={this.props.messages}
+                            render={messages => console.log('Can you see me, now?', messages)}
+                        />
                     )}
                 </Spotlight>
             </CenterStage>
@@ -36,9 +54,10 @@ class Home extends React.Component {
     };
 };
 
-const mapPropsToState = (state) => ({
-    messages: state.messages,
-    fetching: state.fetching
-});
+// const mapPropsToState = ({ props }) => ({
+//     messages: props.messages,
+//     fetching: props.fetching
+// });
 
-export default connect(mapPropsToState, { fetchMessages })(Home);
+export default connect(null, { fetchMessages })(Home);
+// export default connect(mapPropsToState, { fetchMessages })(Home);

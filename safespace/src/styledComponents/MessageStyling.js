@@ -10,15 +10,6 @@ export const TopContainer = styled.div`
     // border: 1px solid brown;
 `;
 
-export const MessageBoard = styled.div`
-    width: 99.8%;
-    height: 99.8%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-`;
-
 export const MessageRow = styled.div`
     width: 90%;
     height: 60px;
