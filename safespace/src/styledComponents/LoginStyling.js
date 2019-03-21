@@ -64,7 +64,9 @@ export const LogInput = styled.input`
     font-weight: 400;
     background-color: #fafafa;
     border: none;
-    outline: none;
+    :focus {
+        outline: none;
+    }
     text-decoration: none;
 `;
 
@@ -80,7 +82,9 @@ export const LoginButton = styled.button`
     background-color: #c1d6fc;
     border: none;
     border-radius: 3px;
-    outline: none;
+    :focus {
+        outline: none;
+    }
 `;
 
 export const OurTerms = styled.div`
@@ -111,5 +115,6 @@ export const buttonDec = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: '#d8d8d8 #d1d1d1 #bababa',
-    borderRadius: '3px'
+    borderRadius: '3px',
+    outline: 'none'
 };

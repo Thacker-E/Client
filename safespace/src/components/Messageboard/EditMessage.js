@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addMessage } from '../../stores/actions';
+import { editMessage } from '../../stores/actions';
 import { ButtonCage, IsButton } from '../../styledComponents/GenStyling'
 import { InputForm, InputCradle, AddInput } from '../../styledComponents/MessageStyling';
 
-class AddMessage extends React.Component {
+class EditMessage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,13 +15,7 @@ class AddMessage extends React.Component {
     }
 
     changeHandler = e => {
-        this.setState({
-            ...this.state,
-            text: {
-            ...this.state.text,
-            [e.target.name]: e.target.value
-            }
-        });
+        this.setState({ [e.target.name]: e.target.value });
     };
 
     componentDidMount() {
@@ -29,18 +23,12 @@ class AddMessage extends React.Component {
             text: {
                 message: ''
             }
-        })
-    }
+        });
+    };
 
     submitHandler = e => {
         e.preventDefault();
-        if (this.state.text.message) {
-            console.log('THIS IS DIFFERENT THAN ALL THE REST', this.state.text);
-            this.props.addHandler(this.state.text);
-            setTimeout(tom => {
-                this.props.refresHandler();
-            }, 1000);
-        };
+        
     };
 
     render() {
@@ -65,4 +53,4 @@ class AddMessage extends React.Component {
     };
 };
 
-export default connect(null, { addMessage })(AddMessage);
+export default connect(null, { editMessage })(EditMessage);

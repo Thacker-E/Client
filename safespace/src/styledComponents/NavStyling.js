@@ -18,7 +18,7 @@ export const CenterBoxseat = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red
+    // border: 1px solid red
 `;
 
 export const Sectional = styled.div`
@@ -28,7 +28,7 @@ export const Sectional = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid green;
+    // border: 1px solid green;
 `;
 
 export const WebsiteName = styled.h1`
@@ -55,7 +55,9 @@ export const LinkNotButton = styled.button`
     margin:  0 0.625em 0;
     padding-top: 4px;
     background-color: #fafafa;;
-    focus: none;
+    :focus {
+        outline: none;
+    }
     color: #7a93c0;
     font-family: 'Orbitron', sans-sarif;
     font-size: 0.60em;

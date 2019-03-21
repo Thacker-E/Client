@@ -43,7 +43,9 @@ export const NotButton = styled.button`
     margin: 0;
     padding: 3px 2px 0;
     background-color: none;
-    focus: none;
+    :focus {
+        outline: none;
+    }
     color: #7a93c0;
     font-family: 'Orbitron', sans-sarif;
     font-size: 12.8px;
@@ -58,16 +60,16 @@ export const NotButton = styled.button`
 `;
 
 export const ButtonBox = styled.div`
-    width: 22%;
+    width: 43.6%;
     height: 99.8%;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     // border: 1px solid gray;
 `;
 
 export const ButtonCage = styled.div`
-    width: 90.2px;
+    width: 98.2px;
     height: 57.2px;
     display: flex;
     justify-content: center;
@@ -78,13 +80,15 @@ export const ButtonCage = styled.div`
 `;
 
 export const IsButton = styled.button`
-    width: 84px;
+    width: 92px;
     height: 51px;
     padding: 9.8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    focus: none;
+    :focus {
+        outline: none;
+    }
     color: #6d6d6d;
     font-family: 'Orbitron', sans-sarif;
     font-size: 0.80em;
@@ -96,7 +100,7 @@ export const IsButton = styled.button`
         background-color: #7a93c0;
     }
     border: none;
-    border-radius: 3px;
+    border-radius: 1.5px;
 `;
 
 export const Text = styled.div`

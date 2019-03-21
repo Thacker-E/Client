@@ -1,28 +1,28 @@
-import { ADD_MESSAGE, ADD_SUCCESS, ADD_FAILURE } from '../actions';
+import { EDIT_MESSAGE, EDIT_SUCCESS, EDIT_FAILURE } from '../actions';
 
 const iniState = {
     message: [],
-    adding: false,
+    editing: false,
     error: null
 };
 
 export const addReducers = (state = iniState, action) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case EDIT_MESSAGE:
             return {
                 ...state,
-                adding: true
+                editing: true
             };
-        case ADD_SUCCESS:
+        case EDIT_SUCCESS:
             return {
                 ...state,
-                message: action.payload,
-                adding: false
+                message: [ ...action.payload ],
+                editing: false
             };
-        case ADD_FAILURE:
+        case EDIT_FAILURE:
             return {
                 ...state,
-                adding: false,
+                editing: false,
                 error: action.payload
             };
         default:

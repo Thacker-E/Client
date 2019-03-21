@@ -8,23 +8,22 @@ import {
     Spotlight,
     DangerZone,
     ButtonBox,
-    ButtonCage,
-    IsButton,
     Text
 } from '../styledComponents/GenStyling';
-import { TopContainer } from '../styledComponents/MessageStyling';
+import { TopContainer, AddCancel, AddCanBut } from '../styledComponents/MessageStyling';
+
+// const OPTIONS = ['One', 'Two', 'Three']
 
 class Home extends React.Component {
     state = {
-        activeView: 'messages'
-    }
-
-    componentDidMount() {
-        this.props.fetchMessages();
-    };
-
-    addMessage = message => {
-        this.props.addMessage(message);
+        activeView: 'messages',
+    //     checkboxes: OPTIONS.reduceRight(
+    //         (options, option) => ({
+    //             ...options,
+    //             [option]: false
+    //         }),
+    //         {}
+    //     )
     }
 
     displayMessages = () => {
@@ -35,6 +34,18 @@ class Home extends React.Component {
         this.setState({ activeView: 'adder' })
     }
 
+    refresHandler = () => {
+        window.location.reload();
+    }
+
+    componentDidMount() {
+        this.props.fetchMessages();
+    };
+
+    addMessage = message => {
+        this.props.addMessage(message);
+    }
+
     render() {
         return (
             <CenterStage>
@@ -42,15 +53,19 @@ class Home extends React.Component {
                     <TopContainer>
                         <Text><h2>HERE ARE YOUR NOTES</h2></Text>
                         <ButtonBox>
-                            <ButtonCage>
-                                <IsButton
-                                    type='button'
-                                    onClick={this.displayAdder}
-                                >ADD</IsButton>
-                            </ButtonCage>
-                            <ButtonCage>
-                                <IsButton>DELETE</IsButton>
-                            </ButtonCage>
+                            <AddCancel>
+                                {this.state.activeView === 'messages' ? (
+                                    <AddCanBut
+                                        type='button'
+                                        onClick={this.displayAdder}
+                                    >ADD A MESSAGE</AddCanBut>
+                                ) : (
+                                    <AddCanBut
+                                        type='button'
+                                        onClick={this.displayMessages}
+                                    >CANCEL?</AddCanBut>
+                                )}
+                            </AddCancel>
                         </ButtonBox>
                     </TopContainer>
                     {this.state.activeView === 'messages' ? (
@@ -58,14 +73,21 @@ class Home extends React.Component {
                             {this.props.fetching === 'fetching' ? (
                                 <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
                             ) : (
-                                <MessageList messages={this.props.messages} />
+                                <MessageList
+                                    messages={this.props.messages}
+                                    refresHandler={this.refresHandler}
+                                />
                             )}
                         </DangerZone>
-                        ) : (
+                    ) : (
+                        <DangerZone>
                             <AddMessage
                                 addHandler={this.addMessage}
+                                refresHandler={this.refresHandler}
+                                // displayMessages={this.displayMessages}
                             />
-                        )}
+                        </DangerZone>
+                    )}
                     
                 </Spotlight>
             </CenterStage>
