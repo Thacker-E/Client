@@ -7,10 +7,6 @@ class AddMessage extends React.Component {
         message: ''
     };
 
-    componentDidMount() {
-        this.props.addMessage();
-    };
-
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
@@ -18,23 +14,30 @@ class AddMessage extends React.Component {
     submitHandler = e => {
         e.preventDefault();
         if (this.state.message) {
-            this.props.addMessage({
+            this.props.addHandler({
                 message: this.state.message
             });
             this.setState({
                 message: ''
             });
+            window.location.reload();
         }
     }
 
     render() {
         return (
             <form onSubmit={this.submitHandler}>
-                <input/>
-                <button></button>
+                <input
+                    type='text'
+                    name='message'
+                    placeholder='Say something nice or encouraging to yourself'
+                    value={this.state.message}
+                    onChange={this.changeHandler}
+                />
+                <button type='submit'>ADD MESSAGE</button>
             </form>
         );
     };
 };
 
-export default AddMessage;
+export default connect(null, { addMessage })(AddMessage);

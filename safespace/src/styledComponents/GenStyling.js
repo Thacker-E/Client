@@ -28,6 +28,15 @@ export const Spotlight = styled.div`
     align-items: center;
 `;
 
+export const DangerZone = styled.div`
+    width: 99.8%;
+    height: 99.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+`;
+
 export const NotButton = styled.button`
     width: auto;
     height: auto;

@@ -27,24 +27,12 @@ export const fetchMessages = () => dispatch => {
         });
 };
 
-// componentDidMount() {
-//     axios
-//     .get('https://safespacebackend.herokuapp.com/messages')
-//     .then(res => {
-//         console.log(res)
-//         this.setState({
-//             messages: res.data,
-//         })
-//     })
-// }
-
 export const addMessage = message => dispatch => {
     dispatch({ type: ADD_MESSAGE });
     axios
-        .push(`https://safespacebackend.herokuapp.com/addmessage`, message)
+        .post('https://safespacebackend.herokuapp.com/addmessage', message)
         .then(res => {
-            dispatch({ type: ADD_SUCCESS, payload: res.data.message });
-            this.props.history.push('/');
+            dispatch({ type: ADD_SUCCESS, payload: res.data });
         })
         .catch(err => {
             console.error(err);
@@ -55,7 +43,7 @@ export const addMessage = message => dispatch => {
 export const editMessage = message => dispatch => {
     dispatch({ type: EDIT_MESSAGE });
     axios
-        .push(`https://safespacebackend.herokuapp.com/messages/:id`, message)
+        .push('https://safespacebackend.herokuapp.com/messages/:id', message)
         .then(res => {
             dispatch({ type: EDIT_SUCCESS, payload: res.data.results });
             this.props.history.push('/');

@@ -1,30 +1,39 @@
 import React from 'react';
-import axios from 'axios';
-// import { connect } from 'react-redux';
-// import { fetchMessages } from '../stores/actions';
+import { connect } from 'react-redux';
+import { fetchMessages, addMessage } from '../stores/actions';
 import MessageList from '../components/Messageboard/MessageList';
-import { CenterStage, Spotlight, Text, ButtonBox, ButtonCage, IsButton } from '../styledComponents/GenStyling';
+import AddMessage from '../components/Messageboard/AddMessage';
+import {
+    CenterStage,
+    Spotlight,
+    DangerZone,
+    ButtonBox,
+    ButtonCage,
+    IsButton,
+    Text
+} from '../styledComponents/GenStyling';
 import { TopContainer } from '../styledComponents/MessageStyling';
 
 class Home extends React.Component {
     state = {
-        messages: []
+        activeView: 'messages'
     }
 
     componentDidMount() {
-        axios
-        .get('https://safespacebackend.herokuapp.com/messages')
-        .then(res => {
-            console.log(res)
-            this.setState({
-                messages: res.data,
-            })
-        })
+        this.props.fetchMessages();
+    };
+
+    addMessage = message => {
+        this.props.addMessage(message);
     }
-    
-    // componentDidMount() {
-    //     this.props.fetchMessages();
-    // };
+
+    displayMessages = () => {
+        this.setState({ activeView: 'messages' })
+    }
+
+    displayAdder = () => {
+        this.setState({ activeView: 'adder' })
+    }
 
     render() {
         return (
@@ -34,32 +43,39 @@ class Home extends React.Component {
                         <Text><h2>HERE ARE YOUR NOTES</h2></Text>
                         <ButtonBox>
                             <ButtonCage>
-                                <IsButton>ADD</IsButton>
+                                <IsButton
+                                    type='button'
+                                    onClick={this.displayAdder}
+                                >ADD</IsButton>
                             </ButtonCage>
                             <ButtonCage>
                                 <IsButton>DELETE</IsButton>
                             </ButtonCage>
                         </ButtonBox>
                     </TopContainer>
-                    {this.props.fetchMessages === 'fetching' ? (
-                        <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
-                    ) : (
-                        <MessageList
-                            messages={this.state.messages}
-                        />
-                    )}
+                    {this.state.activeView === 'messages' ? (
+                        <DangerZone>
+                            {this.props.fetching === 'fetching' ? (
+                                <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
+                            ) : (
+                                <MessageList messages={this.props.messages} />
+                            )}
+                        </DangerZone>
+                        ) : (
+                            <AddMessage
+                                addHandler={this.addMessage}
+                            />
+                        )}
+                    
                 </Spotlight>
             </CenterStage>
         );
     };
 };
 
-// const mapPropsToState = state => {
-//     return {
-//         messages: state.messages,
-//         fetching: state.fetching
-//     }
-// };
+const mapPropsToState = ({ fetchReducers }) => ({
+    messages: fetchReducers.messages,
+    fetching: fetchReducers.fetching
+});
 
-export default Home;
-// export default connect(mapPropsToState, { fetchMessages })(Home);
+export default connect(mapPropsToState, { fetchMessages, addMessage })(Home);
