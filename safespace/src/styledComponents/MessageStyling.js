@@ -19,16 +19,6 @@ export const MessageRow = styled.div`
     // border: 1px solid blue;
 `;
 
-export const Checkbox = styled.div`
-    width: 57.2px;
-    height: 57.2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    border: 2px solid #000;
-`;
-
 export const MessageBody = styled.div`
     width: 92%;
     height: 57.2px;
@@ -36,5 +26,7 @@ export const MessageBody = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    border: 2px solid black;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
 `;

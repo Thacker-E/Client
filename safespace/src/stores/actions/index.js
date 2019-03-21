@@ -18,7 +18,7 @@ export const fetchMessages = () => dispatch => {
     axios
         .get(`https://safespacebackend.herokuapp.com/messages`)
         .then(res => {
-            console.log(res.data)
+            console.log(res)
             dispatch({ type: FETCH_SUCCESS, payload: res.data });
         })
         .catch(err => {
@@ -26,6 +26,17 @@ export const fetchMessages = () => dispatch => {
             dispatch({ type: FETCH_FAILURE, payload: err });
         });
 };
+
+// componentDidMount() {
+//     axios
+//     .get('https://safespacebackend.herokuapp.com/messages')
+//     .then(res => {
+//         console.log(res)
+//         this.setState({
+//             messages: res.data,
+//         })
+//     })
+// }
 
 export const addMessage = message => dispatch => {
     dispatch({ type: ADD_MESSAGE });

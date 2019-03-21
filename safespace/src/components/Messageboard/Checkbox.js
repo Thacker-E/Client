@@ -8,7 +8,9 @@ export const CheckboxContainer = styled.div`
     justify-content: center;
     align-items: center;
     color: #fff;
-    border: 2px solid #000;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
 `;
 
 export const Icon = styled.svg`
@@ -35,9 +37,9 @@ export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 
 export const StyledCheckbox = styled.div`
     display: inline-block;
-    width: 47px;
-    height: 47px;
-    background: ${props => (props.checked ? '#7a93c0' : '#c1d6fc')}
+    width: 51px;
+    height: 51px;
+    background: ${props => (props.checked ? '#c1d6fc' : '#b0c7f1')}
     transition: all 150ms;
     ${HiddenCheckbox}:focus + & {
         box-shadow: 0 0 0 3px pink;
