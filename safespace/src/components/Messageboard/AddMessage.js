@@ -35,9 +35,8 @@ class AddMessage extends React.Component {
     submitHandler = e => {
         e.preventDefault();
         if (this.state.text.message) {
-            console.log('THIS IS DIFFERENT THAN ALL THE REST', this.state.text);
             this.props.addHandler(this.state.text);
-            setTimeout(tom => {
+            setTimeout(() => {
                 this.props.refresHandler();
             }, 1000);
         };

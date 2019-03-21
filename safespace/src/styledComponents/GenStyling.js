@@ -133,11 +133,19 @@ export const Text = styled.div`
         font-weight: 700;
     }
     p {
-        margin: 0.60em 0;
+        margin: 0.80em 0;
+        line-height: 12px;
         color: #6d6d6d;
         font-size: 0.80em;
-        font-weight: 500;
+        font-weight: 400;
     }
+`;
+
+export const CompName = styled.span`
+    margin: 0;
+    color: #b0c7f1;
+    font-size: 12.4px;
+    font-weight: 700;
 `;
 
 export const TextBlock = styled.div`

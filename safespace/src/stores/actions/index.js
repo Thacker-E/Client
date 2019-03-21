@@ -41,10 +41,10 @@ export const addMessage = message => dispatch => {
         });
 };
 
-export const editMessage = message => dispatch => {
+export const editMessage = (message, id) => dispatch => {
     dispatch({ type: EDIT_MESSAGE });
     axios
-        .put(`https://safespacebackend.herokuapp.com/updatemessage/${message}`)
+        .put(`https://safespacebackend.herokuapp.com/updatemessage/${id}`, message)
         .then(res => {
             dispatch({ type: EDIT_SUCCESS, payload: res.data });
         })

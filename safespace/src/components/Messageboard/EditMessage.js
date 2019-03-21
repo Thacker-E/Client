@@ -15,20 +15,34 @@ class EditMessage extends React.Component {
     }
 
     changeHandler = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
-
-    componentDidMount() {
         this.setState({
+            ...this.state,
             text: {
-                message: ''
+            ...this.state.text,
+            [e.target.name]: e.target.value
             }
         });
     };
 
-    submitHandler = e => {
+    foobar = () => {
+        this.props.banana();
+    }
+
+    refresHandler = () => {
+        window.location.reload();
+    };
+
+    submitHandler = (e) => {
         e.preventDefault();
-        
+        if (this.state.text.message) {
+            this.props.editMessage(
+                this.state.text,
+                this.props.foobar
+            );
+            setTimeout(() => {
+                this.refresHandler();
+            }, 1000);
+        };
     };
 
     render() {
@@ -38,7 +52,6 @@ class EditMessage extends React.Component {
                     <AddInput
                         type='text'
                         name='message'
-                        placeholder='Say something nice or encouraging to yourself'
                         value={this.state.text.message}
                         onChange={this.changeHandler}
                         autoComplete='off'
@@ -46,7 +59,7 @@ class EditMessage extends React.Component {
                     />
                 </InputCradle>
                 <ButtonCage>
-                    <IsButton type='submit'>ADD MESSAGE</IsButton>
+                    <IsButton type='submit'>EDIT</IsButton>
                 </ButtonCage>
             </InputForm>
         );

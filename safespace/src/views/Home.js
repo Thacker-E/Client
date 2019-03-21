@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages, addMessage } from '../stores/actions';
-import MessageList from '../components/Messageboard/MessageList';
-import AddMessage from '../components/Messageboard/AddMessage';
+import { MessageList, AddMessage } from '../components/Messageboard';
 import {
     CenterStage,
     Spotlight,
@@ -27,16 +26,20 @@ class Home extends React.Component {
     }
 
     displayMessages = () => {
-        this.setState({ activeView: 'messages' })
-    }
+        this.setState({ activeView: 'messages' });
+    };
 
     displayAdder = () => {
-        this.setState({ activeView: 'adder' })
-    }
+        this.setState({ activeView: 'adder' });
+    };
+
+    displayEdit = () => {
+        this.setState({ activeView: 'editer' });
+    };
 
     refresHandler = () => {
         window.location.reload();
-    }
+    };
 
     componentDidMount() {
         this.props.fetchMessages();
@@ -44,6 +47,10 @@ class Home extends React.Component {
 
     addMessage = message => {
         this.props.addMessage(message);
+    };
+
+    editMessage = message => {
+        this.props.editMessage(message);
     }
 
     render() {
@@ -68,27 +75,35 @@ class Home extends React.Component {
                             </AddCancel>
                         </ButtonBox>
                     </TopContainer>
-                    {this.state.activeView === 'messages' ? (
+                    {this.state.activeView === 'messages' && (
                         <DangerZone>
                             {this.props.fetching === 'fetching' ? (
                                 <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
                             ) : (
                                 <MessageList
                                     messages={this.props.messages}
+                                    displayEdit={this.displayEdit}
                                     refresHandler={this.refresHandler}
                                 />
                             )}
                         </DangerZone>
-                    ) : (
+                    )}
+                    {this.state.activeView === 'adder' && (
                         <DangerZone>
                             <AddMessage
                                 addHandler={this.addMessage}
                                 refresHandler={this.refresHandler}
-                                // displayMessages={this.displayMessages}
                             />
                         </DangerZone>
                     )}
-                    
+                    {/* {this.state.activeView === 'editer' && (
+                        <DangerZone>
+                            <EditMessage
+                                editHandler={this.editMessage}
+                                refresHandler={this.refresHandler}
+                            />
+                        </DangerZone>
+                    )} */}
                 </Spotlight>
             </CenterStage>
         );
