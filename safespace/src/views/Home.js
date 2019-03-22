@@ -1,29 +1,57 @@
 import React from 'react';
-// import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchMessages } from '../stores/actions';
-import MessageList from '../components/Messageboard/MessageList';
-import { CenterStage, Spotlight, Text, ButtonBox, ButtonCage, IsButton } from '../styledComponents/GenStyling';
-import { TopContainer } from '../styledComponents/MessageStyling';
+import { fetchMessages, addMessage } from '../stores/actions';
+import { MessageList, AddMessage } from '../components/Messageboard';
+import {
+    CenterStage,
+    Spotlight,
+    DangerZone,
+    ButtonBox,
+    Text
+} from '../styledComponents/GenStyling';
+import { TopContainer, AddCancel, AddCanBut } from '../styledComponents/MessageStyling';
+
+// const OPTIONS = ['One', 'Two', 'Three']
 
 class Home extends React.Component {
     state = {
-        messages: [],
+        activeView: 'messages',
+    //     checkboxes: OPTIONS.reduceRight(
+    //         (options, option) => ({
+    //             ...options,
+    //             [option]: false
+    //         }),
+    //         {}
+    //     )
     }
 
-    // componentDidMount() {
-    //     axios.get('https://safespacebackend.herokuapp.com/messages')
-    //     .then(res => {
-    //         console.log(res)
-    //         this.setState({
-    //             messages: res.data,
-    //         })
-    //     })
-    // }
-    
+    displayMessages = () => {
+        this.setState({ activeView: 'messages' });
+    };
+
+    displayAdder = () => {
+        this.setState({ activeView: 'adder' });
+    };
+
+    displayEdit = () => {
+        this.setState({ activeView: 'editer' });
+    };
+
+    refresHandler = () => {
+        window.location.reload();
+    };
+
     componentDidMount() {
         this.props.fetchMessages();
     };
+
+    addMessage = message => {
+        this.props.addMessage(message);
+    };
+
+    editMessage = message => {
+        this.props.editMessage(message);
+    }
 
     render() {
         return (
@@ -32,32 +60,59 @@ class Home extends React.Component {
                     <TopContainer>
                         <Text><h2>HERE ARE YOUR NOTES</h2></Text>
                         <ButtonBox>
-                            <ButtonCage>
-                                <IsButton>ADD</IsButton>
-                            </ButtonCage>
-                            <ButtonCage>
-                                <IsButton>DELETE</IsButton>
-                            </ButtonCage>
+                            <AddCancel>
+                                {this.state.activeView === 'messages' ? (
+                                    <AddCanBut
+                                        type='button'
+                                        onClick={this.displayAdder}
+                                    >ADD A MESSAGE</AddCanBut>
+                                ) : (
+                                    <AddCanBut
+                                        type='button'
+                                        onClick={this.displayMessages}
+                                    >CANCEL?</AddCanBut>
+                                )}
+                            </AddCancel>
                         </ButtonBox>
                     </TopContainer>
-                    {this.props.fetchMessages === 'fetching' ? (
-                        <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
-                    ) : (
-                        <MessageList
-                            messages={this.props.messages}
-                            render={messages => console.log('Can you see me, now?', messages)}
-                        />
+                    {this.state.activeView === 'messages' && (
+                        <DangerZone>
+                            {this.props.fetching === 'fetching' ? (
+                                <Text><p>PLEASE WAIT WHILE WE GRAB YOUR MESSAGES</p></Text>
+                            ) : (
+                                <MessageList
+                                    messages={this.props.messages}
+                                    displayEdit={this.displayEdit}
+                                    refresHandler={this.refresHandler}
+                                />
+                            )}
+                        </DangerZone>
                     )}
+                    {this.state.activeView === 'adder' && (
+                        <DangerZone>
+                            <AddMessage
+                                addHandler={this.addMessage}
+                                refresHandler={this.refresHandler}
+                            />
+                        </DangerZone>
+                    )}
+                    {/* {this.state.activeView === 'editer' && (
+                        <DangerZone>
+                            <EditMessage
+                                editHandler={this.editMessage}
+                                refresHandler={this.refresHandler}
+                            />
+                        </DangerZone>
+                    )} */}
                 </Spotlight>
             </CenterStage>
         );
     };
 };
 
-// const mapPropsToState = ({ props }) => ({
-//     messages: props.messages,
-//     fetching: props.fetching
-// });
+const mapPropsToState = ({ fetchReducers }) => ({
+    messages: fetchReducers.messages,
+    fetching: fetchReducers.fetching
+});
 
-export default connect(null, { fetchMessages })(Home);
-// export default connect(mapPropsToState, { fetchMessages })(Home);
+export default connect(mapPropsToState, { fetchMessages, addMessage })(Home);

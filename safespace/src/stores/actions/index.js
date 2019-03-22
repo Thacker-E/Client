@@ -18,7 +18,7 @@ export const fetchMessages = () => dispatch => {
     axios
         .get(`https://safespacebackend.herokuapp.com/messages`)
         .then(res => {
-            console.log(res.data)
+            console.log(res)
             dispatch({ type: FETCH_SUCCESS, payload: res.data });
         })
         .catch(err => {
@@ -29,42 +29,40 @@ export const fetchMessages = () => dispatch => {
 
 export const addMessage = message => dispatch => {
     dispatch({ type: ADD_MESSAGE });
+    console.log(message);
     axios
-        .push(`https://safespacebackend.herokuapp.com/addmessage`, message)
+        .post('https://safespacebackend.herokuapp.com/addmessage', message)
         .then(res => {
-            dispatch({ type: ADD_SUCCESS, payload: res.data.message });
-            this.props.history.push('/');
+            dispatch({ type: ADD_SUCCESS, payload: res.data });
         })
         .catch(err => {
             console.error(err);
             dispatch({ type: ADD_FAILURE, payload: err });
-        })
-}
+        });
+};
 
-export const editMessage = message => dispatch => {
+export const editMessage = (message, id) => dispatch => {
     dispatch({ type: EDIT_MESSAGE });
     axios
-        .push(`https://safespacebackend.herokuapp.com/messages/:id`, message)
+        .put(`https://safespacebackend.herokuapp.com/updatemessage/${id}`, message)
         .then(res => {
-            dispatch({ type: EDIT_SUCCESS, payload: res.data.results });
-            this.props.history.push('/');
+            dispatch({ type: EDIT_SUCCESS, payload: res.data });
         })
         .catch(err => {
             console.error(err);
             dispatch({ type: EDIT_FAILURE, payload: err });
-        })
-}
+        });
+};
 
 export const deleteMessage = message => dispatch => {
     dispatch({ type: DELETE_MESSAGE });
     axios
-        .push(`https://safespacebackend.herokuapp.com/deletemessages/:id`, message)
+        .delete(`https://safespacebackend.herokuapp.com/deletemessage/${message}`)
         .then(res => {
-            dispatch({ type: DELETE_SUCCESS, payload: res.data.results });
-            this.props.history.push('/');
+            dispatch({ type: DELETE_SUCCESS, payload: res.data });
         })
         .catch(err => {
             console.error(err);
             dispatch({ type: DELETE_FAILURE, payload: err });
-        })
-}
+        });
+};

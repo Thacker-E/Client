@@ -41,9 +41,11 @@ export default class HomeBanner extends React.Component {
                             CONTACT
                         </LinkNotButton>
                     </Link>
-                    <LinkNotButton type='button' onClick={this.logout}>
-                        LOG OUT
-                    </LinkNotButton>
+                    <Link to='/'>
+                        <LinkNotButton type='button' onClick={this.logout}>
+                            LOGOUT
+                        </LinkNotButton>
+                    </Link>
                 </Sectional>
             </Banner>
         )

@@ -9,32 +9,45 @@ import {
     LinkNotButton
 } from '../../styledComponents/NavStyling';
 
-const AboutBanner = props => (
-    <Banner>
-        <Sectional>
-            <PageName>ABOUT</PageName>
-        </Sectional>
-        <CenterBoxseat>
-            <WebsiteName>YOUR SAFE SPACE</WebsiteName>
-        </CenterBoxseat>
-        <Sectional>
-            <Link to='/'>
-                <LinkNotButton type='button' onClick={props.displayHome}>
-                    HOME
-                </LinkNotButton>
-            </Link>
-            <Link to='/help'>
-                <LinkNotButton type='button' onClick={props.displayHelp}>
-                    HELP
-                </LinkNotButton>
-            </Link>
-            <Link to='/contact'>
-                <LinkNotButton type='button' onClick={props.displayContact}>
-                    CONTACT
-                </LinkNotButton>
-            </Link>
-        </Sectional>
-    </Banner>
-);
-
-export default AboutBanner;
+export default class HomeBanner extends React.Component {
+    logout = () => {
+        console.log('Hello, is free you\'re looking for?')
+        localStorage.removeItem('jwt');
+        window.location.reload();
+    }
+    
+    render() {
+        return (
+            <Banner>
+                <Sectional>
+                    <PageName>ABOUT</PageName>
+                </Sectional>
+                <CenterBoxseat>
+                    <WebsiteName>YOUR SAFE SPACE</WebsiteName>
+                </CenterBoxseat>
+                <Sectional>
+                    <Link to='/'>
+                        <LinkNotButton type='button' onClick={this.props.displayHome}>
+                            HOME
+                        </LinkNotButton>
+                    </Link>
+                    <Link to='/help'>
+                        <LinkNotButton type='button' onClick={this.props.displayHelp}>
+                            HELP
+                        </LinkNotButton>
+                    </Link>
+                    <Link to='/contact'>
+                        <LinkNotButton type='button' onClick={this.props.displayContact}>
+                            CONTACT
+                        </LinkNotButton>
+                    </Link>
+                    <Link to='/'>
+                        <LinkNotButton type='button' onClick={this.logout}>
+                            LOGOUT
+                        </LinkNotButton>
+                    </Link>
+                </Sectional>
+            </Banner>
+        )
+    };
+};
